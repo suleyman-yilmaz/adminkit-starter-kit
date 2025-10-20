@@ -112,42 +112,66 @@
                     <h5 class="modal-title" id="editProfileModalLabel">Profili Düzenle</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
                 </div>
-                <form action="#" method="POST">
+                <form action="{{ route('backend.profile.update', auth()->user()->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <!-- Name -->
-                                <div class="mb-3">
-                                    <label class="form-label">Ad Soyad</label>
-                                    <input type="text" name="name" class="form-control" value="{{ auth()->user()->name }}">
-                                </div>
+                        <!-- Sekme Başlıkları -->
+                        <ul class="nav nav-tabs" id="editProfileTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info"
+                                        type="button" role="tab" aria-controls="info" aria-selected="true">
+                                    <i data-feather="user"></i> Bilgiler
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password"
+                                        type="button" role="tab" aria-controls="password" aria-selected="false">
+                                    <i data-feather="lock"></i> Şifre Değiştir
+                                </button>
+                            </li>
+                        </ul>
 
-                                <!-- Email -->
-                                <div class="mb-3">
-                                    <label class="form-label">E-posta</label>
-                                    <input type="email" name="email" class="form-control" value="{{ auth()->user()->email }}" readonly>
+                        <!-- Sekme İçerikleri -->
+                        <div class="tab-content mt-3" id="editProfileTabsContent">
+                            <!-- Bilgiler Sekmesi -->
+                            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Ad Soyad</label>
+                                            <input type="text" name="name" class="form-control"
+                                                   value="{{ auth()->user()->name }}">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">E-posta</label>
+                                            <input type="email" name="email" class="form-control"
+                                                   value="{{ auth()->user()->email }}" readonly>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
-                                <!-- Mevcut Şifre -->
-                                <div class="mb-3">
-                                    <label class="form-label">Mevcut Şifre</label>
-                                    <input type="password" name="current_password" class="form-control" required>
-                                </div>
+                            <!-- Şifre Değiştir Sekmesi -->
+                            <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Mevcut Şifre</label>
+                                            <input type="password" name="current_password" class="form-control">
+                                        </div>
 
-                                <!-- Yeni Şifre -->
-                                <div class="mb-3">
-                                    <label class="form-label">Yeni Şifre</label>
-                                    <input type="password" name="new_password" class="form-control">
-                                </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Yeni Şifre</label>
+                                            <input type="password" name="new_password" class="form-control">
+                                        </div>
 
-                                <!-- Yeni Şifre Tekrar -->
-                                <div class="mb-3">
-                                    <label class="form-label">Yeni Şifre (Tekrar)</label>
-                                    <input type="password" name="new_password_confirmation" class="form-control">
+                                        <div class="mb-3">
+                                            <label class="form-label">Yeni Şifre (Tekrar)</label>
+                                            <input type="password" name="new_password_confirmation" class="form-control">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

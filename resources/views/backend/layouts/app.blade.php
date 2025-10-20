@@ -44,14 +44,14 @@
         });
     </script>
 @endif
-@if (session('error'))
+@if ($errors->any())
     <script>
         Swal.fire({
             icon: 'error',
             title: 'Hata!',
-            text: "{{ session('error') }}",
+            html: `{!! implode('<br>', $errors->all()) !!}`,
             showConfirmButton: false,
-            timer: 3000, // 3 saniye sonra kapanacak
+            timer: 3000,
             toast: true,
             position: 'top-end'
         });
