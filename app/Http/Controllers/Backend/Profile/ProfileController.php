@@ -22,27 +22,18 @@ class ProfileController extends Controller
     {
         $data = $request->validated();
         $user = User::findOrFail($id);
-
         try {
-            // Adı her durumda güncelle
             $user->name = $data['name'];
-
-            // Eğer kullanıcı yeni şifre girmediyse sadece ad kaydedilsin
             if (empty($data['new_password'])) {
                 $user->save();
                 return back()->withSuccess('Profil bilgileri başarıyla güncellendi.');
             }
-
-            // Şifre girmediyse, mevcut şifreyi doğrula
             if (!Hash::check($data['current_password'], $user->password)) {
                 return back()
                     ->withErrors('Mevcut şifre hatalı.');
             }
-
-            // Şifre doğruysa yeni şifreyi kaydet
             $user->password = Hash::make($data['new_password']);
             $user->save();
-
             return back()->withSuccess('Şifre başarıyla güncellendi.');
         } catch (\Exception $e) {
             return back()->withErrors('Bir hata oluştu');
