@@ -45,4 +45,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getInitialsAttribute() : string
+    {
+        $parts = explode(' ', $this->name ?? '');
+        $initials = collect($parts)->map(fn($p) => mb_substr($p, 0, 1))->join('');
+        return mb_strtoupper(mb_substr($initials, 0, 2));
+    }
 }
