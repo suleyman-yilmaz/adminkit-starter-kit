@@ -41,6 +41,18 @@ By installing it directly via the terminal, you can **instantly start developing
 
 ## 🎯 Getting Started
 
+
+### ✅ Default Login Credentials
+
+You can log in to the demo panel using the following credentials:
+
+| Field | Value |
+|-------|--------|
+| **Email** | `admin@admin.com` |
+| **Password** | `12345678` |
+
+Once logged in, you can access the dashboard and update your password.
+
 ### Prerequisites
 
 Make sure you have the following installed:
